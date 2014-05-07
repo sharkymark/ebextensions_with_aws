@@ -13,7 +13,7 @@ One topic that peaked my interest was the .ebextensions folder you create in you
 In particular, telling Rails not to do a rake db:migrate and possibly to skip an asset compilation ( although I will end up doing this for performance reasons ).
 
 The Yaml is very particular, so I had to reference an AWS doc on format, but ended getting the following to work inside a 01step.config file I created in my new <rails folder>/.ebextensions folder.
-
+```
 option_settings:
 
   - namespace: aws:elasticbeanstalk:application:environment
@@ -25,8 +25,14 @@ option_settings:
   - option_name: RAILS_SKIP_ASSET_COMPILATION
 
     value: true
+```
+Be sure to locally:
 
-Be sure to git add . and git commit -m ‘ebextensions added’ this locally, then git aws.push
+```
+git add .
+git commit -m ‘ebextensions added'
+git aws.push
+```
 
 In the AWS console, within EB, I can pull up the logs and it shows it is reading the config file, and NOT performing the two options I specified.
 
